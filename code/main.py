@@ -4,6 +4,7 @@ from imutils.video import FPS
 from ultralytics import YOLO
 from tracker import Tracker
 import argparse
+import time
 
 def load_model(path):
     return YOLO(path)
@@ -66,13 +67,14 @@ def draw_lines(frame, cy1, cy2):
 
 def draw_counters(frame, counter, counter1):
     d = len(counter)
-    cv2.putText(frame, f'Going Down: -{d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     u = len(counter1)
-    cv2.putText(frame, f'Going Up: -{u}', (60, 130), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
-def draw_fps(frame, fps):
-    txt_fps = f"FPS: {fps.fps():.2f}"
-    cv2.putText(frame, txt_fps, (60, 180), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+def draw_fps(frame, num_frames, elapsed_time):
+    fps = num_frames / elapsed_time if elapsed_time > 0 else 0
+    txt_fps = f"FPS: {fps:.2f}"
+    cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
 def main(video_source, model_path, labels_path):
     tracker = Tracker()
@@ -83,6 +85,9 @@ def main(video_source, model_path, labels_path):
     vh_up, counter1 = {}, []
 
     cap = cv2.VideoCapture(video_source)
+    fps = FPS().start()  # Start the FPS counter
+    start_time = time.time()  # Start the timer
+    num_frames = 0  # Initialize the frame count
 
     model = load_model(model_path)
     labels = read_labels(labels_path)
@@ -106,10 +111,15 @@ def main(video_source, model_path, labels_path):
         draw_lines(frame, cy1, cy2)
         draw_counters(frame, counter, counter1)
 
+        num_frames += 1
+        elapsed_time = time.time() - start_time  # Calculate elapsed time
+        draw_fps(frame, num_frames, elapsed_time)  # Draw FPS on the frame
+
         cv2.imshow('Object Counter Program', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
+    fps.stop()  # Stop the FPS counter when the loop exits
     cap.release()
     cv2.destroyAllWindows()
 
