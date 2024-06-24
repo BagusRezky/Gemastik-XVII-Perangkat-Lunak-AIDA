@@ -5,6 +5,10 @@ from ultralytics import YOLO
 from tracker import Tracker
 import argparse
 import time
+import subprocess
+import paho.mqtt.client as mqtt
+import json
+import numpy as np
 
 def load_model(path):
     return YOLO(path)
@@ -76,6 +80,15 @@ def draw_fps(frame, num_frames, elapsed_time):
     txt_fps = f"FPS: {fps:.2f}"
     cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected with result code {rc}")
+
+def publish_interactions(client, interactions):
+    topic = "vehicle/interactions"
+    message = json.dumps(interactions)
+    client.publish(topic, message)
+    print(f"Published interactions: {message}")
+
 def main(video_source, model_path, labels_path):
     tracker = Tracker()
     count = 0
@@ -91,6 +104,29 @@ def main(video_source, model_path, labels_path):
 
     model = load_model(model_path)
     labels = read_labels(labels_path)
+
+    mqtt_client = mqtt.Client()
+    mqtt_client.on_connect = on_connect
+    mqtt_client.connect("localhost", 1883, 60)
+    mqtt_client.loop_start()
+
+    # FFmpeg command to stream video via RTSP
+    ffmpeg_command = [
+        'ffmpeg',
+        '-re',  # Read input at native frame rate
+        '-f', 'rawvideo',
+        '-vcodec', 'rawvideo',
+        '-pix_fmt', 'bgr24',
+        '-s', '1020x500',  # Size of one frame
+        '-r', '30',  # Frames per second
+        '-i', '-',  # Input from stdin
+        '-c:v', 'libx264',  # Video codec
+        '-preset', 'ultrafast',  # Preset
+        '-f', 'rtsp',  # Output format
+        'rtsp://localhost:8554/mystream'  # Output URL
+    ]
+
+    ffmpeg_process = subprocess.Popen(ffmpeg_command, stdin=subprocess.PIPE)
 
     while True:
         ret, frame = cap.read()
@@ -115,13 +151,21 @@ def main(video_source, model_path, labels_path):
         elapsed_time = time.time() - start_time  # Calculate elapsed time
         draw_fps(frame, num_frames, elapsed_time)  # Draw FPS on the frame
 
-        cv2.imshow('Object Counter Program', frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        try:
+            ffmpeg_process.stdin.write(frame.tobytes())
+        except BrokenPipeError:
+            print("Broken pipe error")
             break
+
+        interactions = {"down": len(counter), "up": len(counter1)}
+        publish_interactions(mqtt_client, interactions)
 
     fps.stop()  # Stop the FPS counter when the loop exits
     cap.release()
     cv2.destroyAllWindows()
+    ffmpeg_process.stdin.close()
+    ffmpeg_process.wait()
+    mqtt_client.loop_stop()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

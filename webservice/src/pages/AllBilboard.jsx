@@ -10,48 +10,6 @@ function AllBillboard() {
           size: "4x8",
           address: "Jl. Raya Bogor, No. 5, Jakarta"
         },
-        {
-          id: 2,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 3,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 4,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 5,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 6,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 7,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
-        {
-          id: 8,
-          image: Rectangle215,
-          size: "4x8",
-          address: "Jl. Raya Bogor, No. 5, Jakarta"
-        },
       ];
 
     return (
@@ -62,6 +20,7 @@ function AllBillboard() {
             {billboards.map((billboard) => (
               <BillboardItem
                 key={billboard.id}
+                id={billboard.id}
                 image={billboard.image}
                 size={billboard.size}
                 address={billboard.address}
