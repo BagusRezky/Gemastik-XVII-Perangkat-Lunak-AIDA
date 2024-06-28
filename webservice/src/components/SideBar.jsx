@@ -5,7 +5,7 @@ function Sidebar() {
   return (
     <div className="h-700 bg-white shadow-md relative w-55 hidden sm:block">
       <div className="p-5">
-        <h1 className="text-lg font-bold">ADINTERACT</h1>
+        <h1 className="text-lg font-bold">AIDA</h1>
       </div>
       <ul className="mt-12">
         <li>

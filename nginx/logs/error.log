@@ -1922,3 +1922,179 @@
 2024/06/27 22:51:52 [notice] 14044#12448: exit
 2024/06/27 22:51:52 [notice] 9836#5636: worker process 14044 exited with code 0
 2024/06/27 22:51:52 [notice] 9836#5636: exit
+2024/06/27 23:31:42 [notice] 11260#12700: using the "select" event method
+2024/06/27 23:31:42 [notice] 11260#12700: nginx/1.14.1
+2024/06/27 23:31:42 [info] 11260#12700: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/27 23:31:42 [notice] 11260#12700: start worker processes
+2024/06/27 23:31:42 [notice] 11260#12700: start worker process 9836
+2024/06/27 23:31:43 [notice] 9836#11492: nginx/1.14.1
+2024/06/27 23:31:43 [info] 9836#11492: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/27 23:31:43 [notice] 9836#11492: create thread 13812
+2024/06/27 23:31:43 [notice] 9836#11492: create thread 1664
+2024/06/27 23:31:43 [notice] 9836#11492: create thread 14748
+2024/06/27 23:32:18 [info] 9836#13812: *1 client connected '127.0.0.1'
+2024/06/27 23:32:18 [info] 9836#13812: *1 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:18 [info] 9836#13812: *1 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:18 [info] 9836#13812: *1 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:19 [info] 9836#13812: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:19 [info] 9836#13812: *1 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:19 [info] 9836#13812: *1 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:32:19 [info] 9836#13812: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:09 [info] 9836#13812: *2 client connected '127.0.0.1'
+2024/06/27 23:33:09 [info] 9836#13812: *2 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:09 [info] 9836#13812: *2 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:09 [info] 9836#13812: *2 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:21 [info] 9836#13812: *2 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:21 [info] 9836#13812: *2 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:21 [info] 9836#13812: *2 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:33:21 [info] 9836#13812: *2 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:33 [info] 9836#13812: *3 client connected '127.0.0.1'
+2024/06/27 23:36:33 [info] 9836#13812: *3 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:33 [info] 9836#13812: *3 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:33 [info] 9836#13812: *3 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:34 [info] 9836#13812: *3 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:34 [info] 9836#13812: *3 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:34 [info] 9836#13812: *3 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:36:34 [info] 9836#13812: *3 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:39:35 [info] 9836#13812: *4 client connected '127.0.0.1'
+2024/06/27 23:39:35 [info] 9836#13812: *4 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:39:35 [info] 9836#13812: *4 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:39:35 [info] 9836#13812: *4 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:40:12 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:12 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:21 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:21 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:24 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:24 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:40 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:40 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:44 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:44 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:40:49 [info] 9836#13812: *5 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/27 23:40:50 [info] 9836#13812: *7 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/27 23:40:54 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:00 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:00 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:04 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:04 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:12 [info] 9836#13812: *9 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/27 23:41:32 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:32 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:57 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:41:57 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:02 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:02 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:37 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:38 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:41 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:41 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:57 [info] 9836#13812: *4 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:42:57 [info] 9836#13812: *4 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:42:57 [info] 9836#13812: *4 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:42:57 [info] 9836#13812: *4 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:42:59 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:42:59 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:43:03 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:43:03 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:43:05 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:43:05 [error] 9836#13812: *8 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:43:41 [info] 9836#13812: *10 client connected '127.0.0.1'
+2024/06/27 23:43:41 [info] 9836#13812: *10 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:43:41 [info] 9836#13812: *10 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:43:41 [info] 9836#13812: *10 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:44:44 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:44:44 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:44:49 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:44:49 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:45:45 [info] 9836#13812: *12 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/27 23:45:46 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:45:47 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:45:49 [error] 9836#13812: *11 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/27 23:48:39 [info] 9836#13812: *10 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:48:39 [info] 9836#13812: *10 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:48:39 [info] 9836#13812: *10 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:48:39 [info] 9836#13812: *10 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/27 23:50:18 [notice] 696#9760: signal process started
+2024/06/27 23:50:18 [notice] 11260#12700: exiting
+2024/06/27 23:50:18 [notice] 9836#11492: gracefully shutting down
+2024/06/27 23:50:18 [notice] 9836#1664: exiting
+2024/06/27 23:50:18 [notice] 9836#13812: exiting
+2024/06/27 23:50:18 [notice] 9836#11492: exit
+2024/06/27 23:50:18 [notice] 11260#12700: worker process 9836 exited with code 0
+2024/06/27 23:50:18 [notice] 11260#12700: exit
+2024/06/28 17:27:24 [notice] 6404#4492: using the "select" event method
+2024/06/28 17:27:24 [notice] 6404#4492: nginx/1.14.1
+2024/06/28 17:27:24 [info] 6404#4492: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/28 17:27:24 [notice] 6404#4492: start worker processes
+2024/06/28 17:27:24 [notice] 6404#4492: start worker process 1224
+2024/06/28 17:27:24 [notice] 1224#9456: nginx/1.14.1
+2024/06/28 17:27:24 [info] 1224#9456: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/28 17:27:24 [notice] 1224#9456: create thread 3728
+2024/06/28 17:27:24 [notice] 1224#9456: create thread 10020
+2024/06/28 17:27:24 [notice] 1224#9456: create thread 10712
+2024/06/28 17:27:37 [error] 1224#3728: *1 CreateFile() "D:\DATA\Lomba\Gemastik 2024\Gemastik SoftDev 2024\ObjectDetectionwithYolov8\nginx/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/stat"
+2024/06/28 17:28:25 [info] 1224#3728: *1 client 127.0.0.1 closed keepalive connection
+2024/06/28 17:28:25 [info] 1224#3728: *2 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/28 17:28:37 [info] 1224#3728: *3 client connected '127.0.0.1'
+2024/06/28 17:28:37 [info] 1224#3728: *3 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:28:37 [info] 1224#3728: *3 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:28:37 [info] 1224#3728: *3 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:29:30 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:30 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:34 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:34 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:41 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:41 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:51 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:51 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:55 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:55 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:56 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:29:57 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:30:16 [info] 1224#3728: *5 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/28 17:30:16 [info] 1224#3728: *6 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/28 17:30:31 [info] 1224#3728: *8 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/06/28 17:31:29 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:32:28 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:32:30 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:32:31 [info] 1224#3728: *3 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:32:31 [info] 1224#3728: *3 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:32:31 [info] 1224#3728: *3 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:32:31 [info] 1224#3728: *3 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:33:29 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:33:31 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:33:33 [error] 1224#3728: *7 CreateFile() "D:/DATA/Lomba/Gemastik 2024/Gemastik SoftDev 2024/ObjectDetectionwithYolov8/nginx/temp/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:5173/"
+2024/06/28 17:33:59 [notice] 2284#4960: signal process started
+2024/06/28 17:33:59 [notice] 6404#4492: exiting
+2024/06/28 17:33:59 [notice] 1224#9456: gracefully shutting down
+2024/06/28 17:33:59 [notice] 1224#10020: exiting
+2024/06/28 17:34:00 [notice] 1224#3728: exiting
+2024/06/28 17:34:00 [notice] 1224#9456: exit
+2024/06/28 17:34:00 [notice] 6404#4492: worker process 1224 exited with code 0
+2024/06/28 17:34:00 [notice] 6404#4492: exit
+2024/06/28 17:39:45 [notice] 9700#13640: using the "select" event method
+2024/06/28 17:39:45 [notice] 9700#13640: nginx/1.14.1
+2024/06/28 17:39:45 [info] 9700#13640: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/28 17:39:45 [notice] 9700#13640: start worker processes
+2024/06/28 17:39:45 [notice] 9700#13640: start worker process 6536
+2024/06/28 17:39:45 [notice] 6536#10876: nginx/1.14.1
+2024/06/28 17:39:45 [info] 6536#10876: OS: 260200 build:9200, "", suite:100, type:1
+2024/06/28 17:39:45 [notice] 6536#10876: create thread 2644
+2024/06/28 17:39:45 [notice] 6536#10876: create thread 11872
+2024/06/28 17:39:45 [notice] 6536#10876: create thread 5624
+2024/06/28 17:40:24 [info] 6536#2644: *1 client connected '127.0.0.1'
+2024/06/28 17:40:24 [info] 6536#2644: *1 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf61.3.' swf_url='' tc_url='rtmp://localhost:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:40:24 [info] 6536#2644: *1 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:40:24 [info] 6536#2644: *1 publish: name='test' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:41:52 [info] 6536#2644: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:41:52 [info] 6536#2644: *1 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:41:52 [info] 6536#2644: *1 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:41:52 [info] 6536#2644: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/06/28 17:42:34 [notice] 5580#11624: signal process started
+2024/06/28 17:42:34 [notice] 9700#13640: exiting
+2024/06/28 17:42:34 [notice] 6536#10876: gracefully shutting down
+2024/06/28 17:42:34 [notice] 6536#11872: exiting
+2024/06/28 17:42:34 [notice] 6536#2644: exiting
+2024/06/28 17:42:34 [notice] 6536#10876: exit
+2024/06/28 17:42:34 [notice] 9700#13640: worker process 6536 exited with code 0
+2024/06/28 17:42:34 [notice] 9700#13640: exit

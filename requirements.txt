@@ -1,5 +1,7 @@
+Salin kode
 opencv-python
 pandas
 imutils
 ultralytics
+paho-mqtt
 # openvino==2024.1.0

@@ -79,9 +79,9 @@ def draw_lines(frame, cy1, cy2):
 
 def draw_counters(frame, counter, counter1):
     d = len(counter)
-    cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    # cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     u = len(counter1)
-    cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    # cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
     # Publish counters to MQTT broker
     mqtt_client.publish(MQTT_TOPIC, f'{{"going_down": {d}, "going_up": {u}}}')
@@ -115,7 +115,7 @@ def main(video_source, model_path, labels_path, rtmp_url):
         '-vcodec', 'rawvideo',
         '-pix_fmt', 'bgr24',
         '-s', '1020x500',  # Frame size
-        '-r', '30',  # Frame rate
+        '-r', '20',  # Frame rate
         '-i', '-',  # Input from stdin
         '-c:v', 'libx264',
         '-pix_fmt', 'yuv420p',
