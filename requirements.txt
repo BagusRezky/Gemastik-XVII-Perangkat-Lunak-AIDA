@@ -1,4 +1,3 @@
-Salin kode
 opencv-python
 pandas
 imutils
