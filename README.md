@@ -2,7 +2,7 @@
 AIDA merupakan aplikasi manajemen billboard cerdas yang mampu menghitung objek yang melewati billboard secara otomatis. Aplikasi ini dibuat untuk memenuhi kebutuhan dalam mengelola reklame luar ruang yang lebih efisien dan efektif. AIDA menggunakan teknologi kecerdasan buatan YOLO untuk mendeteksi objek yang melewati billboard dan menghitung jumlahnya. AIDA juga dilengkapi dengan fitur analisis data yang memungkinkan pengguna untuk melihat data jumlah objek yang melewati billboard dalam bentuk grafik. 
 
 ## Anggota Tim
-1. Andi Dwi Prasetyo
+1. Andi Dwi Prastyo
 2. Bagus Rezky Adhyaksa
 3. Anisa Rahmasari
 4. Dosen Pembimbing : Muhammad Afif Hendrawan,S.Kom., M.T.
@@ -69,8 +69,12 @@ AIDA merupakan aplikasi manajemen billboard cerdas yang mampu menghitung objek y
     * Replace `'path_to_rtmp_url'` with the RTMP URL for the server. The default URL is `'rtmp://localhost/live/test'`.
   
 8.  Jalankan Web
-   
-      A. Jalankan Web
+
+      A. Install dependencies
+
+      `$ npm install`
+
+      B. Jalankan Web
       
       `$ npm run dev`
 
