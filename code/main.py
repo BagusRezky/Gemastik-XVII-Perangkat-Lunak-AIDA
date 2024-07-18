@@ -1,5 +1,7 @@
 import cv2
 import pandas as pd
+import mysql.connector
+from mysql.connector import Error
 from imutils.video import FPS
 from ultralytics import YOLO
 from tracker import Tracker
@@ -77,6 +79,26 @@ def draw_lines(frame, cy1, cy2):
     cv2.line(frame, (154, cy2), (913, cy2), (255, 255, 255), 1)
     cv2.putText(frame, 'Line 2', (154, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
+#function to save data to MySQL database
+def save_to_database(going_down, going_up):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='vehicle_data',
+            user='root',  # replace with your database username
+            password=''  # replace with your database password
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            query = "INSERT INTO interactions (going_down, going_up) VALUES (%s, %s)"
+            cursor.execute(query, (going_down, going_up))
+            connection.commit()
+            cursor.close()
+            connection.close()
+    except Error as e:
+        print(f"Error: {e}")
+
+
 def draw_counters(frame, counter, counter1):
     d = len(counter)
     # cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
@@ -86,12 +108,13 @@ def draw_counters(frame, counter, counter1):
     # Publish counters to MQTT broker
     mqtt_client.publish(MQTT_TOPIC, f'{{"going_down": {d}, "going_up": {u}}}')
 
+
 def draw_fps(frame, num_frames, elapsed_time):
     fps = num_frames / elapsed_time if elapsed_time > 0 else 0
     txt_fps = f"FPS: {fps:.2f}"
     cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
-def main(video_source, model_path, labels_path, rtmp_url):
+def main(video_source, model_path, labels_path, hls_output_dir):
     tracker = Tracker()
     count = 0
     cy1, cy2, offset = 323, 367, 6
@@ -119,10 +142,15 @@ def main(video_source, model_path, labels_path, rtmp_url):
         '-i', '-',  # Input from stdin
         '-c:v', 'libx264',
         '-pix_fmt', 'yuv420p',
-        '-f', 'flv',
-        rtmp_url
+        '-hls_time', '5',  # Duration of each segment in seconds
+        '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
+        '-f', 'hls',
+        f'{hls_output_dir}/index.m3u8'
     ]
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
+
+    # Timer to save data every hour
+    hourly_timer = time.time()
 
     while True:
         ret, frame = cap.read()
@@ -154,25 +182,33 @@ def main(video_source, model_path, labels_path, rtmp_url):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
+        # Save data every hour
+        if time.time() - hourly_timer >= 3600:  # 3600 seconds = 1 hour
+            save_to_database(len(counter), len(counter1))
+            hourly_timer = time.time()
+
     fps.stop()  # Stop the FPS counter when the loop exits
     cap.release()
     cv2.destroyAllWindows()
     ffmpeg_process.stdin.close()
     ffmpeg_process.wait()
 
+    # Save data when video ends
+    save_to_database(len(counter), len(counter1))
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--video', type=str, required=True)
     parser.add_argument('--model', type=str, required=True)
     parser.add_argument('--label', type=str, required=True)
-    parser.add_argument('--rtmp_url', type=str, required=True, help="RTMP URL for streaming")
+    parser.add_argument('--hls_output_dir', type=str, required=True, help="Directory for HLS output")
 
     args = parser.parse_args()
 
-    print(f"Video: {args.video}")
-    print(f"Model: {args.model}")
-    print(f"Label: {args.label}")
-    print(f"RTMP URL: {args.rtmp_url}")
+    # print(f"Video: {args.video}")
+    # print(f"Model: {args.model}")
+    # print(f"Label: {args.label}")
+    # print(f"RTMP URL: {args.rtmp_url}")
 
-    main(args.video, args.model, args.label, args.rtmp_url)
+    main(args.video, args.model, args.label, args.hls_output_dir)
 
