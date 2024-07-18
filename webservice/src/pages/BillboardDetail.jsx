@@ -20,9 +20,11 @@ function BillboardDetail() {
     // Membuat permintaan Axios untuk memastikan CORS
     const fetchHlsManifest = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/hls/test.m3u8");
+        const response = await axios.get(
+          "http://localhost:8080/hls/index.m3u8"
+        );
         if (response.status === 200) {
-          setVideoUrl("http://localhost:8080/hls/test.m3u8");
+          setVideoUrl("http://localhost:8080/hls/index.m3u8");
           setIsReady(true);
         }
       } catch (error) {
@@ -84,7 +86,6 @@ function BillboardDetail() {
     }
   }, [isReady, videoUrl]);
 
-
   useEffect(() => {
     const client = mqtt.connect("ws://localhost:9001/mqtt");
 
@@ -114,7 +115,6 @@ function BillboardDetail() {
     };
   }, []);
 
-
   const billboard = {
     id,
     size: "4x8",
@@ -132,8 +132,8 @@ function BillboardDetail() {
           ref={videoRef}
           id="rtmp-video"
           className="video-js vjs-default-skin"
-          width="850"
-          height="480"
+          width="640"
+          height="360"
           controls
         ></video>
         {!isReady && <p>Loading video...</p>}
@@ -155,4 +155,3 @@ function BillboardDetail() {
 }
 
 export default BillboardDetail;
-
