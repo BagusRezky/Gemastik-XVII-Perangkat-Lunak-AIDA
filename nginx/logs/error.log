@@ -3978,3 +3978,98 @@
 2024/07/17 17:54:52 [notice] 4180#13440: exit
 2024/07/17 17:54:52 [notice] 2576#12904: worker process 4180 exited with code 0
 2024/07/17 17:54:52 [notice] 2576#12904: exit
+2024/07/20 21:25:03 [notice] 12352#7856: using the "select" event method
+2024/07/20 21:25:03 [notice] 12352#7856: nginx/1.14.1
+2024/07/20 21:25:03 [info] 12352#7856: OS: 260200 build:9200, "", suite:100, type:1
+2024/07/20 21:25:03 [notice] 12352#7856: start worker processes
+2024/07/20 21:25:03 [notice] 12352#7856: start worker process 4744
+2024/07/20 21:25:03 [notice] 4744#1356: nginx/1.14.1
+2024/07/20 21:25:03 [info] 4744#1356: OS: 260200 build:9200, "", suite:100, type:1
+2024/07/20 21:25:03 [notice] 4744#1356: create thread 7668
+2024/07/20 21:25:03 [notice] 4744#1356: create thread 8276
+2024/07/20 21:25:03 [notice] 4744#1356: create thread 14304
+2024/07/20 22:20:02 [error] 4744#7668: *1 CreateFile() "D:\DATA\Lomba\Gemastik 2024\Gemastik SoftDev 2024\Gemastik-XVII-Perangkat-Lunak-AIDA\nginx/html/stat" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /stat HTTP/1.1", host: "localhost:8080"
+2024/07/20 22:21:02 [info] 4744#7668: *2 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/20 23:11:51 [info] 4744#7668: *4 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:53:32 [info] 4744#7668: *6 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:53:32 [info] 4744#7668: *5 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:57:37 [info] 4744#7668: *7 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:57:37 [info] 4744#7668: *8 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:57:47 [info] 4744#7668: *10 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:57:47 [info] 4744#7668: *9 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:57:57 [info] 4744#7668: *12 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:57:57 [info] 4744#7668: *11 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:07 [info] 4744#7668: *13 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:07 [info] 4744#7668: *14 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:17 [info] 4744#7668: *16 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:17 [info] 4744#7668: *15 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:27 [info] 4744#7668: *18 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:27 [info] 4744#7668: *17 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:37 [info] 4744#7668: *19 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:37 [info] 4744#7668: *20 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:47 [info] 4744#7668: *21 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:58:47 [info] 4744#7668: *22 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:57 [info] 4744#7668: *24 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:58:57 [info] 4744#7668: *23 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:07 [info] 4744#7668: *26 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:07 [info] 4744#7668: *25 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:17 [info] 4744#7668: *27 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:17 [info] 4744#7668: *28 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:27 [info] 4744#7668: *30 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:27 [info] 4744#7668: *29 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:37 [info] 4744#7668: *32 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:37 [info] 4744#7668: *31 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:47 [info] 4744#7668: *33 client 127.0.0.1 closed keepalive connection
+2024/07/21 00:59:47 [info] 4744#7668: *34 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:58 [info] 4744#7668: *36 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 00:59:58 [info] 4744#7668: *35 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:00:08 [info] 4744#7668: *37 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:00:08 [info] 4744#7668: *38 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:00:18 [info] 4744#7668: *39 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:00:18 [info] 4744#7668: *40 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:00:28 [info] 4744#7668: *42 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:00:28 [info] 4744#7668: *41 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:00:38 [info] 4744#7668: *44 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:00:38 [info] 4744#7668: *43 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:01:43 [info] 4744#7668: *46 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:15:04 [info] 4744#7668: *48 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:15:04 [info] 4744#7668: *47 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:15:14 [info] 4744#7668: *49 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:15:14 [info] 4744#7668: *50 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:15:54 [info] 4744#7668: *51 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:15:54 [info] 4744#7668: *52 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:16:14 [info] 4744#7668: *54 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:16:14 [info] 4744#7668: *53 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:16:24 [info] 4744#7668: *56 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:16:24 [info] 4744#7668: *55 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:16:34 [info] 4744#7668: *58 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:16:34 [info] 4744#7668: *57 client 127.0.0.1 closed keepalive connection
+2024/07/21 01:16:34 [info] 4744#7668: *59 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:17:36 [info] 4744#7668: *61 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:31:17 [info] 4744#7668: *63 client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2024/07/21 01:37:42 [notice] 10280#7660: signal process started
+2024/07/21 01:37:42 [notice] 12352#7856: exiting
+2024/07/21 01:37:42 [notice] 4744#1356: gracefully shutting down
+2024/07/21 01:37:42 [notice] 4744#8276: exiting
+2024/07/21 01:37:42 [notice] 4744#7668: exiting
+2024/07/21 01:37:42 [notice] 4744#1356: exit
+2024/07/21 01:37:42 [notice] 12352#7856: worker process 4744 exited with code 0
+2024/07/21 01:37:42 [notice] 12352#7856: exit
+2024/07/21 16:53:30 [notice] 7636#10720: using the "select" event method
+2024/07/21 16:53:30 [notice] 7636#10720: nginx/1.14.1
+2024/07/21 16:53:30 [info] 7636#10720: OS: 260200 build:9200, "", suite:100, type:1
+2024/07/21 16:53:30 [notice] 7636#10720: start worker processes
+2024/07/21 16:53:30 [notice] 7636#10720: start worker process 992
+2024/07/21 16:53:30 [notice] 992#6136: nginx/1.14.1
+2024/07/21 16:53:30 [info] 992#6136: OS: 260200 build:9200, "", suite:100, type:1
+2024/07/21 16:53:30 [notice] 992#6136: create thread 8132
+2024/07/21 16:53:30 [notice] 992#6136: create thread 2864
+2024/07/21 16:53:30 [notice] 992#6136: create thread 8308
+2024/07/21 17:40:14 [notice] 12252#7420: signal process started
+2024/07/21 17:40:14 [notice] 7636#10720: exiting
+2024/07/21 17:40:14 [notice] 992#6136: gracefully shutting down
+2024/07/21 17:40:14 [notice] 992#2864: exiting
+2024/07/21 17:40:14 [notice] 992#8132: exiting
+2024/07/21 17:40:14 [notice] 992#6136: exit
+2024/07/21 17:40:14 [notice] 7636#10720: worker process 992 exited with code 0
+2024/07/21 17:40:14 [notice] 7636#10720: exit
