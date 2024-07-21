@@ -1,10 +1,9 @@
 import cv2
 import pandas as pd
-import mysql.connector
-from mysql.connector import Error
 from imutils.video import FPS
 from ultralytics import YOLO
 from tracker import Tracker
+import json
 import argparse
 import time
 import paho.mqtt.client as mqtt
@@ -79,24 +78,12 @@ def draw_lines(frame, cy1, cy2):
     cv2.line(frame, (154, cy2), (913, cy2), (255, 255, 255), 1)
     cv2.putText(frame, 'Line 2', (154, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
-#function to save data to MySQL database
-def save_to_database(going_down, going_up):
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='vehicle_data',
-            user='root',  # replace with your database username
-            password=''  # replace with your database password
-        )
-        if connection.is_connected():
-            cursor = connection.cursor()
-            query = "INSERT INTO interactions (going_down, going_up) VALUES (%s, %s)"
-            cursor.execute(query, (going_down, going_up))
-            connection.commit()
-            cursor.close()
-            connection.close()
-    except Error as e:
-        print(f"Error: {e}")
+def publish_data(going_down, going_up):
+    data = {
+        "going_down": going_down,
+        "going_up": going_up
+    }
+    mqtt_client.publish(MQTT_TOPIC, json.dumps(data))
 
 
 def draw_counters(frame, counter, counter1):
@@ -104,9 +91,7 @@ def draw_counters(frame, counter, counter1):
     # cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     u = len(counter1)
     # cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
-
-    # Publish counters to MQTT broker
-    mqtt_client.publish(MQTT_TOPIC, f'{{"going_down": {d}, "going_up": {u}}}')
+    publish_data(d, u)
 
 
 def draw_fps(frame, num_frames, elapsed_time):
@@ -149,9 +134,6 @@ def main(video_source, model_path, labels_path, hls_output_dir):
     ]
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
-    # Timer to save data every hour
-    hourly_timer = time.time()
-
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -182,19 +164,13 @@ def main(video_source, model_path, labels_path, hls_output_dir):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-        # Save data every hour
-        if time.time() - hourly_timer >= 3600:  # 3600 seconds = 1 hour
-            save_to_database(len(counter), len(counter1))
-            hourly_timer = time.time()
-
     fps.stop()  # Stop the FPS counter when the loop exits
     cap.release()
     cv2.destroyAllWindows()
     ffmpeg_process.stdin.close()
     ffmpeg_process.wait()
 
-    # Save data when video ends
-    save_to_database(len(counter), len(counter1))
+    publish_data(len(counter), len(counter1))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
