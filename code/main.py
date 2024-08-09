@@ -99,7 +99,7 @@ def draw_fps(frame, num_frames, elapsed_time):
     txt_fps = f"FPS: {fps:.2f}"
     cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
-def main(video_source, model_path, labels_path, hls_output_dir):
+def main(model_path, labels_path, rtmp_url):
     tracker = Tracker()
     count = 0
     cy1, cy2, offset = 323, 367, 6
@@ -107,7 +107,7 @@ def main(video_source, model_path, labels_path, hls_output_dir):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    cap = cv2.VideoCapture(video_source)
+    cap = cv2.VideoCapture('rtsp://192.168.88.248')
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -129,8 +129,8 @@ def main(video_source, model_path, labels_path, hls_output_dir):
         '-pix_fmt', 'yuv420p',
         '-hls_time', '5',  # Duration of each segment in seconds
         '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
-        '-f', 'hls',
-        f'{hls_output_dir}/index.m3u8'
+        '-f', 'flv',
+        rtmp_url
     ]
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
@@ -174,10 +174,9 @@ def main(video_source, model_path, labels_path, hls_output_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--video', type=str, required=True)
     parser.add_argument('--model', type=str, required=True)
     parser.add_argument('--label', type=str, required=True)
-    parser.add_argument('--hls_output_dir', type=str, required=True, help="Directory for HLS output")
+    parser.add_argument('--rtmp_url', type=str, required=True, help="Directory for HLS output")
 
     args = parser.parse_args()
 
@@ -186,5 +185,5 @@ if __name__ == "__main__":
     # print(f"Label: {args.label}")
     # print(f"RTMP URL: {args.rtmp_url}")
 
-    main(args.video, args.model, args.label, args.hls_output_dir)
+    main(args.model, args.label, args.rtmp_url)
 
