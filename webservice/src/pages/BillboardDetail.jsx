@@ -20,11 +20,9 @@ function BillboardDetail() {
     // Membuat permintaan Axios untuk memastikan CORS
     const fetchHlsManifest = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/hls/index.m3u8"
-        );
+        const response = await axios.get("http://103.245.38.40/hls/test.m3u8");
         if (response.status === 200) {
-          setVideoUrl("http://localhost:8080/hls/index.m3u8");
+          setVideoUrl("http://103.245.38.40/hls/test.m3u8");
           setIsReady(true);
         }
       } catch (error) {
