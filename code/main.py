@@ -25,6 +25,7 @@ def load_model(path):
 def read_labels(path):
     with open(path, 'r') as file:
         labels_list = file.read().strip().split('\n')
+    print("Labels loaded:", labels_list)  # Cetak label untuk verifikasi
     return labels_list
 
 def get_detections(frame, model, labels):
@@ -36,8 +37,10 @@ def get_detections(frame, model, labels):
     for _, row in boxes.iterrows():
         x1, y1, x2, y2 = map(int, row[:4])
         d = int(row[5])
+        if d >= len(labels):  # Periksa jika indeks melebihi panjang daftar label
+            print("Label index out of range:", d)
+            continue
         label = labels[d]
-
         if 'car' in label:
             detections.append([x1, y1, x2, y2])
 
@@ -107,7 +110,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    cap = cv2.VideoCapture('rtsp://192.168.88.248')
+    cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
+    # cap = cv2.VideoCapture('../veh2.mp4')
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -122,13 +126,17 @@ def main(model_path, labels_path, rtmp_url):
         '-f', 'rawvideo',
         '-vcodec', 'rawvideo',
         '-pix_fmt', 'bgr24',
-        '-s', '1020x500',  # Frame size
+        '-s', '1280x720',  # Frame size
         '-r', '20',  # Frame rate
         '-i', '-',  # Input from stdin
         '-c:v', 'libx264',
         '-pix_fmt', 'yuv420p',
-        '-hls_time', '5',  # Duration of each segment in seconds
-        '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
+        '-preset', 'veryfast',
+        '-b:v', '2048k',
+        '-maxrate', '2048k',
+        '-bufsize', '4096k',
+        # '-hls_time', '5',  # Duration of each segment in seconds
+        # '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
         '-f', 'flv',
         rtmp_url
     ]
@@ -143,7 +151,7 @@ def main(model_path, labels_path, rtmp_url):
         if count % 3 != 0:
             continue
 
-        frame = cv2.resize(frame, (1020, 500))
+        frame = cv2.resize(frame, (1280, 720))
 
         detections = get_detections(frame, model, labels)
         bbox_id = tracker.update(detections)
