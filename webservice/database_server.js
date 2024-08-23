@@ -61,9 +61,9 @@ const saveToDatabase = () => {
 };
 
 // Save data every hour
-// setInterval(saveToDatabase, 3600000);
-// Save data every 2 minutes
-setInterval(saveToDatabase, 120000);
+setInterval(saveToDatabase, 3600000);
+// // Save data every 2 minutes
+// setInterval(saveToDatabase, 120000);
 
 app.get("/interactions", (req, res) => {
   const query = "SELECT * FROM interactions ORDER BY id DESC LIMIT 1";
