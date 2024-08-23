@@ -110,8 +110,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
-    # cap = cv2.VideoCapture('../veh2.mp4')
+    # cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
+    cap = cv2.VideoCapture('../veh2.mp4')
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -132,9 +132,9 @@ def main(model_path, labels_path, rtmp_url):
         '-c:v', 'libx264',
         '-pix_fmt', 'yuv420p',
         '-preset', 'veryfast',
-        '-b:v', '2048k',
-        '-maxrate', '2048k',
-        '-bufsize', '4096k',
+        '-b:v', '3000k',
+        '-maxrate', '3000k',
+        '-bufsize', '5000k',
         # '-hls_time', '5',  # Duration of each segment in seconds
         # '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
         '-f', 'flv',
