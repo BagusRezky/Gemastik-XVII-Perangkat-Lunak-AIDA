@@ -25,6 +25,9 @@ const init = () => {
 
   setInterval(() => {
     dbService.saveToDatabase(goingDown, goingUp, billboardName);
+    // Reset the data after 1 hour
+    goingDown = 0;
+    goingUp = 0;
   }, 3600000); // Save data every hour
 };
 
