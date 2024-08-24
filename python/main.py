@@ -110,8 +110,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    # cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
-    cap = cv2.VideoCapture('../veh2.mp4')
+    cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
+    # cap = cv2.VideoCapture('../veh2.mp4')
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -121,25 +121,24 @@ def main(model_path, labels_path, rtmp_url):
 
     # Start FFmpeg process
     ffmpeg_cmd = [
-        'ffmpeg',
-        '-y',
-        '-f', 'rawvideo',
-        '-vcodec', 'rawvideo',
-        '-pix_fmt', 'bgr24',
-        '-s', '1280x720',  # Frame size
-        '-r', '20',  # Frame rate
-        '-i', '-',  # Input from stdin
-        '-c:v', 'libx264',
-        '-pix_fmt', 'yuv420p',
-        '-preset', 'veryfast',
-        '-b:v', '3000k',
-        '-maxrate', '3000k',
-        '-bufsize', '5000k',
-        # '-hls_time', '5',  # Duration of each segment in seconds
-        # '-hls_list_size', '0',  # Number of entries in the playlist (0 means no limit)
-        '-f', 'flv',
-        rtmp_url
-    ]
+    'ffmpeg',
+    '-y',
+    '-rtsp_transport', 'udp',
+    '-f', 'rawvideo',          # Menggunakan input dari stdin
+    '-vcodec', 'rawvideo',      # Mengatur codec untuk input sebagai rawvideo
+    '-pix_fmt', 'bgr24',        # Format piksel dari OpenCV (BGR)
+    '-s', '1280x720',           # Ukuran frame
+    '-r', '20',                 # Frame rate
+    '-i', '-',                  # Input dari stdin (OpenCV)
+    '-c:v', 'libx264',          # Codec untuk encoding video
+    '-preset', 'veryfast',      # Preset encoding cepat
+    '-maxrate', '1500k',        # Max bitrate
+    '-bufsize', '3000k',        # Buffer size
+    '-pix_fmt', 'yuv420p',      # Format piksel output
+    '-g', '50',                 # Group of pictures setting
+    '-f', 'flv',                # Format output (FLV untuk RTMP)
+    rtmp_url
+]
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
     while True:
