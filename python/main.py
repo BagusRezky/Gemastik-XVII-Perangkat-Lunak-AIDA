@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 # MQTT settings
-MQTT_BROKER = "localhost"
+MQTT_BROKER = "103.245.38.40"
 MQTT_PORT = 1883
 MQTT_TOPIC = "vehicle/interactions"
 
