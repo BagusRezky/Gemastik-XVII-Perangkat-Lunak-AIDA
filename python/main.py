@@ -9,6 +9,7 @@ import time
 import paho.mqtt.client as mqtt
 import subprocess
 import sys
+import threading
 
 # MQTT settings
 MQTT_BROKER = "103.245.38.40"
@@ -18,6 +19,34 @@ MQTT_TOPIC = "vehicle/interactions"
 # Initialize MQTT client
 mqtt_client = mqtt.Client()
 mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+
+class VideoStreamHandler:
+    def __init__(self, source):
+        self.cap = cv2.VideoCapture(source)
+        self.ret = False
+        self.frame = None
+        self.running = True
+        self.lock = threading.Lock()
+
+        self.thread = threading.Thread(target=self.update, args=())
+        self.thread.daemon = True
+        self.thread.start()
+
+    def update(self):
+        while self.running:
+            ret, frame = self.cap.read()
+            with self.lock:
+                self.ret = ret
+                self.frame = frame
+
+    def read(self):
+        with self.lock:
+            return self.ret, self.frame
+
+    def release(self):
+        self.running = False
+        self.thread.join()
+        self.cap.release()
 
 def load_model(path):
     return YOLO(path)
@@ -88,14 +117,12 @@ def publish_data(going_down, going_up):
     }
     mqtt_client.publish(MQTT_TOPIC, json.dumps(data))
 
-
 def draw_counters(frame, counter, counter1):
     d = len(counter)
-    # cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+# cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     u = len(counter1)
-    # cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+# cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     publish_data(d, u)
-
 
 def draw_fps(frame, num_frames, elapsed_time):
     fps = num_frames / elapsed_time if elapsed_time > 0 else 0
@@ -110,8 +137,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    # cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.249')
-    cap = cv2.VideoCapture('../veh2.mp4')
+    stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
+
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -121,30 +148,29 @@ def main(model_path, labels_path, rtmp_url):
 
     # Start FFmpeg process
     ffmpeg_cmd = [
-    'ffmpeg',
-    '-y',
-    # '-rtsp_transport', 'udp',
-    '-f', 'rawvideo',          # Menggunakan input dari stdin
-    '-vcodec', 'rawvideo',      # Mengatur codec untuk input sebagai rawvideo
-    '-pix_fmt', 'bgr24',        # Format piksel dari OpenCV (BGR)
-    '-s', '1280x720',           # Ukuran frame
-    '-r', '20',                 # Frame rate
-    '-i', '-',                  # Input dari stdin (OpenCV)
-    '-c:v', 'libx264',          # Codec untuk encoding video
-    '-preset', 'veryfast',      # Preset encoding cepat
-    '-maxrate', '1500k',        # Max bitrate
-    '-bufsize', '3000k',        # Buffer size
-    '-pix_fmt', 'yuv420p',      # Format piksel output
-    '-g', '50',                 # Group of pictures setting
-    '-f', 'flv',                # Format output (FLV untuk RTMP)
-    rtmp_url
-]
+        'ffmpeg',
+        '-y',
+        '-f', 'rawvideo',          # Menggunakan input dari stdin
+        '-vcodec', 'rawvideo',      # Mengatur codec untuk input sebagai rawvideo
+        '-pix_fmt', 'bgr24',        # Format piksel dari OpenCV (BGR)
+        '-s', '1280x720',           # Ukuran frame
+        '-r', '10',                 # Frame rate
+        '-i', '-',                  # Input dari stdin (OpenCV)
+        '-c:v', 'libx264',          # Codec untuk encoding video
+        '-preset', 'veryfast',      # Preset encoding cepat
+        '-maxrate', '1500k',        # Max bitrate
+        '-bufsize', '3000k',        # Buffer size
+        '-pix_fmt', 'yuv420p',      # Format piksel output
+        '-g', '50',                 # Group of pictures setting
+        '-f', 'flv',                # Format output (FLV untuk RTMP)
+        rtmp_url
+    ]
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
     while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
+        ret, frame = stream_handler.read()
+        if not ret or frame is None:
+            continue
 
         count += 1
         if count % 3 != 0:
@@ -172,7 +198,7 @@ def main(model_path, labels_path, rtmp_url):
             break
 
     fps.stop()  # Stop the FPS counter when the loop exits
-    cap.release()
+    stream_handler.release()
     cv2.destroyAllWindows()
     ffmpeg_process.stdin.close()
     ffmpeg_process.wait()
@@ -187,10 +213,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # print(f"Video: {args.video}")
-    # print(f"Model: {args.model}")
-    # print(f"Label: {args.label}")
-    # print(f"RTMP URL: {args.rtmp_url}")
-
-    main(args.model, args.label, args.rtmp_url)
-
+    main(model_path=args.model, labels_path=args.label, rtmp_url=args.rtmp_url)
