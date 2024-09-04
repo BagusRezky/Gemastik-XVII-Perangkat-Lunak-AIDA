@@ -189,7 +189,8 @@ def main(model_path, labels_path, rtmp_url):
         vh_down, counter = {}, []
         vh_up, counter1 = {}, []
 
-        stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
+        # stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
+        stream_handler = VideoStreamHandler('./veh2.mp4')
 
         fps = FPS().start()
         start_time = time.time()
