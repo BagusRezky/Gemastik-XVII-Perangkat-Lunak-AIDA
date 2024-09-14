@@ -12,7 +12,8 @@ import sys
 import threading
 import logging
 import os
-import torch 
+import torch
+import gc
 
 # Create logs directory if it doesn't exist
 if not os.path.exists('logs'):
@@ -54,7 +55,8 @@ except Exception as e:
 
 class VideoStreamHandler:
     def __init__(self, source):
-        self.cap = cv2.VideoCapture(source)
+        self.source = source
+        self.cap = cv2.VideoCapture(self.source)
         self.ret = False
         self.frame = None
         self.running = True
@@ -66,10 +68,16 @@ class VideoStreamHandler:
 
     def update(self):
         while self.running:
-            ret, frame = self.cap.read()
             with self.lock:
-                self.ret = ret
-                self.frame = frame
+                self.ret, self.frame = self.cap.read()
+                if not self.ret:
+                    logger.error("Failed to retrieve frame from stream. Reconnecting...")
+                    self.reconnect()
+
+    def reconnect(self):
+        self.cap.release()
+        time.sleep(2)
+        self.cap = cv2.VideoCapture(self.source)
 
     def read(self):
         with self.lock:
@@ -99,7 +107,7 @@ def get_detections(frame, model, labels):
     logger.debug("Getting detections from the frame.")
     try:
         results = model.predict(frame)
-        res = results[0].boxes.data
+        res = results[0].boxes.data.cpu().numpy()
         boxes = pd.DataFrame(res).astype('float')
         detections = []
 
@@ -183,14 +191,12 @@ def main(model_path, labels_path, rtmp_url):
     logger.info("Starting main function.")
     try:
         tracker = Tracker()
-        count = 0
         cy1, cy2, offset = 323, 367, 6
 
         vh_down, counter = {}, []
         vh_up, counter1 = {}, []
 
-        # stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
-        stream_handler = VideoStreamHandler('./veh2.mp4')
+        stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
 
         fps = FPS().start()
         start_time = time.time()
@@ -199,46 +205,42 @@ def main(model_path, labels_path, rtmp_url):
         model = load_model(model_path)
         labels = read_labels(labels_path)
 
-        # Start FFmpeg process
         ffmpeg_cmd = [
             'ffmpeg',
             '-y',
             '-f', 'rawvideo',
             '-vcodec', 'rawvideo',
             '-pix_fmt', 'bgr24',
-            '-s', '704x576',
-            '-r', '10',
+            '-s', '640x480',
+            '-r', '15',
             '-i', '-',
-            '-c:v', 'libx264',
-            '-preset', 'veryfast',
-            '-maxrate', '1500k',
-            '-bufsize', '3000k',
+            '-g', '15',
+            '-c:v', 'h264_nvmpi',
+            '-b:v', '300k',
+            '-preset', 'ultrafast',
+            '-maxrate', '300k',
+            '-bufsize', '600k',
             '-pix_fmt', 'yuv420p',
             '-g', '50',
             '-f', 'flv',
-            rtmp_url
+            rtmp_url,
+            '-loglevel', 'info',
+            '-report',
         ]
         ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
-
         logger.info("FFmpeg process started.")
-
+	
         while True:
             ret, frame = stream_handler.read()
             if not ret or frame is None:
-                logger.warning("Failed to retrieve frame from stream.")
                 continue
 
-            count += 1
-            if count % 3 != 0:
-                continue
-
-            frame = cv2.resize(frame, (704, 576))
+            frame = cv2.resize(frame, (640, 480))
 
             detections = get_detections(frame, model, labels)
             bbox_id = tracker.update(detections)
 
             process_bboxes(bbox_id, frame, cy1, cy2, offset, vh_down, counter, vh_up, counter1)
-
             draw_lines(frame, cy1, cy2)
             draw_counters(frame, counter, counter1)
 
@@ -254,10 +256,12 @@ def main(model_path, labels_path, rtmp_url):
                     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
             fps.update()
+
             cv2.imshow('Object Counter Program', frame)
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-
+	
         fps.stop()
         logger.info(f"[INFO] Elapsed time: {fps.elapsed():.2f}")
         logger.info(f"[INFO] Approx. FPS: {fps.fps():.2f}")
