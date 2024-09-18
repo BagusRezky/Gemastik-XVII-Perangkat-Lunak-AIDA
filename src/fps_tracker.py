@@ -16,5 +16,5 @@ class FPSTracker:
     def elapsed(self):
         return self.fps.elapsed()
 
-    def fps(self):
+    def get_fps(self):
         return self.fps.fps()

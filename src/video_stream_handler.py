@@ -1,9 +1,18 @@
 import cv2
 import threading
+from logger import setup_logger
 
 class VideoStreamHandler:
     def __init__(self, source):
+        self.logger = setup_logger()
+        self.logger.info("Initializing video stream...")
+        
         self.cap = cv2.VideoCapture(source)
+
+        # Set frame width and height to 640x480
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
         self.ret = False
         self.frame = None
         self.running = True
@@ -28,4 +37,4 @@ class VideoStreamHandler:
         self.running = False
         self.thread.join()
         self.cap.release()
-        logger.info("Video stream released.")
+        self.logger.info("Video stream released.")

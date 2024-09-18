@@ -15,12 +15,13 @@ def main(model_path, labels_path, rtmp_url):
     logger = setup_logger()
     tracker = Tracker()
     count = 0
-    cy1, cy2, offset = 323, 367, 6
+    cy1, cy2, offset = 323, 367, 20
 
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
+    # stream_handler = VideoStreamHandler('rtsp://admin:CRPBEB@192.168.88.229')
+    stream_handler = VideoStreamHandler('./veh2.mp4')
 
     fps_tracker = FPSTracker()
     fps_tracker.start()
@@ -37,25 +38,28 @@ def main(model_path, labels_path, rtmp_url):
 
     # Update FFmpeg command to log to file
     ffmpeg_cmd = [
-        'ffmpeg',
-        '-y',
-        '-f', 'rawvideo',
-        '-vcodec', 'rawvideo',
-        '-pix_fmt', 'bgr24',
-        '-s', '704x576',
-        '-r', '10',
-        '-i', '-',
-        '-c:v', 'libx264',
-        '-preset', 'veryfast',
-        '-maxrate', '1500k',
-        '-bufsize', '3000k',
-        '-pix_fmt', 'yuv420p',
-        '-g', '50',
-        '-f', 'flv',
-         rtmp_url,
-        '-loglevel', 'info',
-        '-report',
-    ]
+            'ffmpeg',
+            '-y',
+            '-f', 'rawvideo',
+            '-vcodec', 'rawvideo',
+            '-pix_fmt', 'bgr24',
+            '-s', '640x480',
+            '-r', '15',
+            '-i', '-',
+            '-g', '15',
+            # '-c:v', 'h264_nvmpi',
+            '-c:v', 'libx264',
+            '-b:v', '300k',
+            '-preset', 'ultrafast',
+            '-maxrate', '300k',
+            '-bufsize', '600k',
+            '-pix_fmt', 'yuv420p',
+            '-g', '50',
+            '-f', 'flv',
+            rtmp_url,
+            '-loglevel', 'info',
+            '-report',
+        ]
 
     # Redirect FFmpeg output to log file
     with open(ffmpeg_log_file, 'w') as log_file:
@@ -73,7 +77,7 @@ def main(model_path, labels_path, rtmp_url):
         if count % 3 != 0:
             continue
 
-        frame = cv2.resize(frame, (704, 576))
+        frame = cv2.resize(frame, (640, 480))
 
         detections = object_detector.get_detections(frame)
         bbox_id = tracker.update(detections)
@@ -103,7 +107,7 @@ def main(model_path, labels_path, rtmp_url):
 
     fps_tracker.stop()
     logger.info(f"[INFO] Elapsed time: {fps_tracker.elapsed():.2f}")
-    logger.info(f"[INFO] Approx. FPS: {fps_tracker.fps():.2f}")
+    logger.info(f"[INFO] Approx. FPS: {fps_tracker.get_fps():.2f}")
 
     stream_handler.release()
     cv2.destroyAllWindows()
@@ -114,7 +118,7 @@ def main(model_path, labels_path, rtmp_url):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Object detection and counting.')
-    parser.add_argument('--model', default='./yolov3-tinyu.pt', help='Model path')
+    parser.add_argument('--model', default='./best.pt', help='Model path')
     parser.add_argument('--labels', default='../coco.txt', help='Labels path')
     parser.add_argument('--rtmp', default='rtmp://103.245.38.40/live/test', help='RTMP URL')
     args = parser.parse_args()

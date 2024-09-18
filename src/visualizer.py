@@ -6,10 +6,10 @@ class Visualizer:
         self.logger = setup_logger()
 
     def draw_lines(self, frame, cy1, cy2):
-        cv2.line(frame, (259, cy1), (811, cy1), (255, 255, 255), 1)
-        cv2.putText(frame, 'Line 1', (274, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
-        cv2.line(frame, (154, cy2), (913, cy2), (255, 255, 255), 1)
-        cv2.putText(frame, 'Line 2', (154, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+        cv2.line(frame, (120, cy1), (520, cy1), (255, 255, 255), 1)
+        cv2.putText(frame, 'Line 1', (150, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+        cv2.line(frame, (70, cy2), (590, cy2), (255, 255, 255), 1)
+        cv2.putText(frame, 'Line 2', (150, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
         self.logger.debug("Lines drawn on the frame.")
 
     def draw_counters(self, frame, counter, counter1):
