@@ -75,11 +75,10 @@ def mark_object(frame, cx, cy, obj_id):
     cv2.putText(frame, str(obj_id), (cx, cy), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
 def draw_lines(frame, cy1, cy2):
-    cv2.line(frame, (150, cy1), (510, cy1), (255, 255, 255), 1)
-    cv2.putText(frame, 'Line 1', (274, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
-    cv2.line(frame, (140, cy2), (520, cy2), (255, 255, 255), 1)
-    cv2.putText(frame, 'Line 2', (154, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
-
+    cv2.line(frame, (130, cy1), (520, cy1), (255, 255, 255), 1)
+    cv2.putText(frame, 'Line 1', (150, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.line(frame, (70, cy2), (580, cy2), (255, 255, 255), 1)
+    cv2.putText(frame, 'Line 2', (120, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 def publish_data(going_down, going_up):
     data = {
         "going_down": going_down,
