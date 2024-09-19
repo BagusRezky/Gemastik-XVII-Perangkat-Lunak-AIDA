@@ -143,7 +143,7 @@ def main(model_path, labels_path, rtmp_url):
     ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
     while True:
-        ret, frame = cap.read()
+        ret, frame = stream_handler.read()
         if not ret:
             break
 
