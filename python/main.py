@@ -9,6 +9,8 @@ import time
 import paho.mqtt.client as mqtt
 import subprocess
 
+from stream_handler import VideoStreamHandler
+
 # MQTT settings
 MQTT_BROKER = "103.245.38.40"
 MQTT_PORT = 1883
@@ -109,8 +111,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    #cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.229')
-    cap = cv2.VideoCapture('../veh2.mp4')
+    stream_handler = VideoStreamHandler('../veh2.mp4')
+
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -171,7 +173,7 @@ def main(model_path, labels_path, rtmp_url):
             break
 
     fps.stop()  # Stop the FPS counter when the loop exits
-    cap.release()
+    stream_handler.release()
     cv2.destroyAllWindows()
     ffmpeg_process.stdin.close()
     ffmpeg_process.wait()
