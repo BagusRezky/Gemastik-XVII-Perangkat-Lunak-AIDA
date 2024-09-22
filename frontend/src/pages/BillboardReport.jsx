@@ -7,6 +7,9 @@ import "jspdf-autotable";
 function BillboardReport() {
   const { billboardName } = useParams();
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +18,7 @@ function BillboardReport() {
           `http://localhost:3000/interactions/BillboardA`
         );
         setData(response.data);
+        setFilteredData(response.data); // Inisialisasi dengan semua data
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,6 +27,20 @@ function BillboardReport() {
     fetchData();
   }, [billboardName]);
 
+  // Fungsi untuk memfilter data berdasarkan tanggal
+  const handleFilter = () => {
+    if (startDate && endDate) {
+      const filtered = data.filter((item) => {
+        const itemDate = new Date(item.timestamp).toISOString().split("T")[0];
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data); // Jika tanggal tidak di-set, tampilkan semua data
+    }
+  };
+
+  // Fungsi untuk mengunduh PDF berdasarkan data yang difilter
   const downloadPDF = () => {
     const doc = new jsPDF();
 
@@ -35,7 +53,7 @@ function BillboardReport() {
     ];
     const tableRows = [];
 
-    data.forEach((item) => {
+    filteredData.forEach((item) => {
       const itemData = [
         new Date(item.timestamp).toLocaleDateString(),
         item.going_down,
@@ -56,12 +74,37 @@ function BillboardReport() {
   return (
     <div className="p-4">
       <h2 className="text-lg font-bold mb-4">Report {billboardName}</h2>
+
+      <div className="mb-4">
+        <label className="mr-2">Start Date:</label>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="border p-1 mr-4"
+        />
+        <label className="mr-2">End Date:</label>
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="border p-1 mr-4"
+        />
+        <button
+          onClick={handleFilter}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          Filter
+        </button>
+      </div>
+
       <button
         onClick={downloadPDF}
         className="mb-4 bg-blue-500 text-white p-2 rounded"
       >
         Download PDF
       </button>
+
       <table className="min-w-full">
         <thead>
           <tr>
@@ -71,7 +114,7 @@ function BillboardReport() {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {filteredData.map((item, index) => (
             <tr key={index}>
               <td>{new Date(item.timestamp).toLocaleDateString()}</td>
               <td>{item.going_down}</td>
