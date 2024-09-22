@@ -9,7 +9,7 @@ function ReportItem({ name, address }) {
         <span className="text-gray-600 ml-4">{address}</span>
       </div>
       <div>
-        <button className="text-blue-500 hover:text-blue-700 mx-2">Edit</button>
+        
         <Link
           to={`/report/${name}`}
           className="text-green-500 hover:text-green-700"
