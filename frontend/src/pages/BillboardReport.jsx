@@ -28,13 +28,18 @@ function BillboardReport() {
 
     doc.text(`Report for ${billboardName}`, 20, 10);
 
-    const tableColumn = ["Tanggal", "Total Interaksi"];
+    const tableColumn = [
+      "Tanggal",
+      "Jumlah Kendaraan Kebawah",
+      "Jumlah Kendaraan Keatas",
+    ];
     const tableRows = [];
 
     data.forEach((item) => {
       const itemData = [
         new Date(item.timestamp).toLocaleDateString(),
-        item.interactions,
+        item.going_down,
+        item.going_up,
       ];
       tableRows.push(itemData);
     });
@@ -61,14 +66,16 @@ function BillboardReport() {
         <thead>
           <tr>
             <th>Tanggal</th>
-            <th>Total Interaksi</th>
+            <th>Jumlah Kendaraan Kebawah</th>
+            <th>Jumlah Kendaraan Keatas</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
               <td>{new Date(item.timestamp).toLocaleDateString()}</td>
-              <td>{item.interactions}</td>
+              <td>{item.going_down}</td>
+              <td>{item.going_up}</td>
             </tr>
           ))}
         </tbody>
