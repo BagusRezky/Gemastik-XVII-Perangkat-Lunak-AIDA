@@ -18,14 +18,18 @@ const init = () => {
   mqttClient.on("message", (topic, message) => {
     if (topic === "vehicle/interactions") {
       const data = JSON.parse(message.toString());
-      goingDown = data.going_down;
+      goingDown = data.going_down; // Update variabel, tidak diakumulasi
       goingUp = data.going_up;
     }
   });
 
   setInterval(() => {
+    // Simpan data ke database
     dbService.saveToDatabase(goingDown, goingUp, billboardName);
-    // Reset the data after 1 hour
+
+    console.log(`Data saved: Going Down: ${goingDown}, Going Up: ${goingUp}`);
+
+    // Reset variabel setelah menyimpan ke database
     goingDown = 0;
     goingUp = 0;
   }, 3600000); // Save data every hour
