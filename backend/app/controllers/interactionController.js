@@ -14,7 +14,7 @@ const getLatestInteraction = (req, res) => {
 const getInteractionByBillboardName = (req, res) => {
   const { billboardName } = req.params;
   const query =
-    "SELECT timestamp, going_down as interactions FROM interactions WHERE billboard_name = ?";
+    "SELECT timestamp, going_down, going_up FROM interactions WHERE billboard_name = ?";
   db.query(query, [billboardName], (err, results) => {
     if (err) {
       res.status(500).send(err);
