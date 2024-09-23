@@ -101,6 +101,14 @@ def draw_fps(frame, num_frames, elapsed_time):
     txt_fps = f"FPS: {fps:.2f}"
     cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
+def reconnect_stream(max_retries=5, retry_interval=5):
+    for attempt in range(max_retries):
+        cap = cv2.VideoCapture('../veh2.mp4')
+        if cap is not None:
+            return cap
+        time.sleep(retry_interval)
+    return None
+
 def main(model_path, labels_path, rtmp_url):
     tracker = Tracker()
     count = 0
@@ -109,8 +117,8 @@ def main(model_path, labels_path, rtmp_url):
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    #cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.229')
-    cap = cv2.VideoCapture('../veh2.mp4')
+    cap = reconnect_stream()
+
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -143,7 +151,11 @@ def main(model_path, labels_path, rtmp_url):
     while True:
         ret, frame = cap.read()
         if not ret:
-            break
+            cap.release()
+            cap = reconnect_stream()
+            if cap is None:
+                break
+            continue
 
         count += 1
         if count % 3 != 0:
@@ -163,7 +175,6 @@ def main(model_path, labels_path, rtmp_url):
         elapsed_time = time.time() - start_time  # Calculate elapsed time
         draw_fps(frame, num_frames, elapsed_time)  # Draw FPS on the frame
 
-    
         # Write frame to FFmpeg process
         try:
             ffmpeg_process.stdin.write(frame.tobytes())
