@@ -10,7 +10,8 @@ import paho.mqtt.client as mqtt
 import subprocess
 import torch
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 # MQTT settings
 MQTT_BROKER = "103.245.38.40"
 MQTT_PORT = 1883
@@ -77,10 +78,10 @@ def mark_object(frame, cx, cy, obj_id):
     cv2.putText(frame, str(obj_id), (cx, cy), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
 def draw_lines(frame, cy1, cy2):
-    cv2.line(frame, (150, cy1), (510, cy1), (255, 255, 255), 1)
-    cv2.putText(frame, 'Line 1', (274, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
-    cv2.line(frame, (140, cy2), (520, cy2), (255, 255, 255), 1)
-    cv2.putText(frame, 'Line 2', (154, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.line(frame, (70, cy1), (520, cy1), (255, 255, 255), 1)
+    cv2.putText(frame, 'Line 1', (150, 318), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.line(frame, (65, cy2), (580, cy2), (255, 255, 255), 1)
+    cv2.putText(frame, 'Line 2', (130, 365), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
 def publish_data(going_down, going_up):
     data = {
@@ -92,9 +93,9 @@ def publish_data(going_down, going_up):
 
 def draw_counters(frame, counter, counter1):
     d = len(counter)
-    # cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.putText(frame, f'Going Down: {d}', (60, 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     u = len(counter1)
-    # cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.putText(frame, f'Going Up: {u}', (60, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
     publish_data(d, u)
 
 
@@ -103,16 +104,25 @@ def draw_fps(frame, num_frames, elapsed_time):
     txt_fps = f"FPS: {fps:.2f}"
     cv2.putText(frame, txt_fps, (60, 120), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 
+def reconnect_stream(max_retries=5, retry_interval=5):
+    for attempt in range(max_retries):
+        cap = cv2.VideoCapture('../percobaan2.mp4')
+        #cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.229?rtsp_transport=tcp')
+        if cap is not None:
+            return cap
+        time.sleep(retry_interval)
+    return None
+
 def main(model_path, labels_path, rtmp_url):
     tracker = Tracker()
     count = 0
-    cy1, cy2, offset = 323, 367, 6
+    cy1, cy2, offset = 440, 470, 14
 
     vh_down, counter = {}, []
     vh_up, counter1 = {}, []
 
-    cap = cv2.VideoCapture('rtsp://admin:CRPBEB@192.168.88.229?rtsp_transport=tcp')
-    #cap = cv2.VideoCapture('../veh2.mp4')
+    cap = reconnect_stream()
+
     fps = FPS().start()  # Start the FPS counter
     start_time = time.time()  # Start the timer
     num_frames = 0  # Initialize the frame count
@@ -131,7 +141,7 @@ def main(model_path, labels_path, rtmp_url):
             '-r', '15',
             '-i', '-',
             '-g', '15',
-            '-c:v', 'h264_nvmpi',
+            '-c:v', 'libx264',
             '-b:v', '300k',
             '-preset', 'ultrafast',
             '-maxrate', '300k',
@@ -146,7 +156,11 @@ def main(model_path, labels_path, rtmp_url):
     while True:
         ret, frame = cap.read()
         if not ret:
-            break
+            cap.release()
+            cap = reconnect_stream()
+            if cap is None:
+                break
+            continue
 
         count += 1
         if count % 3 != 0:
@@ -167,7 +181,14 @@ def main(model_path, labels_path, rtmp_url):
         draw_fps(frame, num_frames, elapsed_time)  # Draw FPS on the frame
 
         # Write frame to FFmpeg process
-        ffmpeg_process.stdin.write(frame.tobytes())
+        try:
+            ffmpeg_process.stdin.write(frame.tobytes())
+        except BrokenPipeError:
+            # Handle broken pipe error (connection lost)
+            print("Connection lost. Attempting to reconnect...")
+            ffmpeg_process.stdin.close()
+            ffmpeg_process.wait()
+            ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
 
         cv2.imshow('Object Counter Program', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
